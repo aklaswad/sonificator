@@ -35,6 +35,17 @@ $('.test-api-support').click ( function () {
 body { margin-top: 50px; }
 </style>
 
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-516648-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
 </head>
 <body>
 <div id="fb-root"></div>
@@ -55,7 +66,7 @@ body { margin-top: 50px; }
         <li><a href="#how-to-play">How To Play</a></li>
       </ul>
       <ul class="nav secondary-nav">
-        <li><a href="#" class="play-this-page">Play this page <span class="label important">possibly loud!!!</span></a></li>
+        <li><a href="#" class="play-this-page">Play This Page <span class="label important">possibly loud!!!</span></a></li>
       </ul>
     </div>
   </div>
@@ -84,7 +95,20 @@ body { margin-top: 50px; }
   <p>
     <a href="http://aklaswad.github.com/sonificator">sonificator</a>は、あらゆる<strong>ウェブページ</strong>から<strong>音楽</strong>を作り出します。サウンドとビジュアルでウェブページのDOMの構造を体験できます。
   </p>
-  <img src="sonificator.png" />
+  <img src="soni1.png" width="200" />
+  <img src="soni2.png" width="200" />
+  <img src="soni3.png" width="200" />
+  <img src="soni4.png" width="200" />
+
+  <div class="alert-message block-message warning">
+    <p><strong>This Software is Beta version!</strong>
+      I experienced <strong>Fatal Browser Crash</strong> between testing. Before try this, save all data you're working on the browser (include other tabs/windows)!
+  </div>
+  <div class="alert-message block-message warning">
+    <p><strong>このソフトウェアはベータ版です</strong>
+      少なくない頻度で<strong>ブラウザの致命的なクラッシュ</strong>が発生する可能性があります。(他のタブやウィンドウを含めた)すべての作業中のデータを保存してからお試しください。
+  </div>
+
   <ul>
     <li><div class="fb-like" data-href="http://aklaswad.github.com/sonificator/" data-send="false" data-width="450" data-show-faces="true"></div></li>
     <li><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="aklaswad">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script></li>
@@ -106,18 +130,16 @@ body { margin-top: 50px; }
         <small><a href="http://en.wikipedia.org/wiki/Sonification">Sonification - Wikipedia, the free encyclopedia</a></small>
       </blockquote>
 
-      <p>This program <a href="http://aklaswad.github.com/sonificator">sonificator</a> can built a music from the <a href="http://en.wikipedia.org/wiki/Document_Object_Model">DOM</a> structure with simple rule. sounds are designed good to listen like ambient or experimental erectoronic music.
-      </p>
-      <p>
+      <p>This program <a href="http://aklaswad.github.com/sonificator">sonificator</a> can built a music from the <a href="http://en.wikipedia.org/wiki/Document_Object_Model">DOM <img src="external.png" /></a> structure with simple rule. sounds are designed good to listen like ambient or experimental erectoronic music.
         <a href="http://aklaswad.github.com/sonificator">sonificator</a> also provide a visual highlight animation of the webpage synchronized to the sound. This may help you know which sound events are come from which element on the page.
       </p>
+
+      <p><a href="http://aklaswad.github.com/sonificator">sonificator</a>は、単純なルールに基づいて<a href="http://en.wikipedia.org/wiki/Document_Object_Model">DOM <img src="external.png" /></a> の構造から音楽を生成します。
+        <a href="http://aklaswad.github.com/sonificator">sonificator</a> はまたウェブページに、音楽に同期したハイライトのアニメーションも追加します。音楽上の各音素が、どのDOM要素に関連付けられているかを確認できます。
+      </p>
+
+
     </div>
-  </div>
-  <div class="row">
-    <div class="span4">aaa</div>
-    <div class="span4">aaa</div>
-    <div class="span4">aaa</div>
-    <div class="span4">aaa</div>
   </div>
 </section>
 
@@ -128,45 +150,116 @@ body { margin-top: 50px; }
   </div>
   <div class="row">
     <div class="span4">
-      <h2>Use Bookmarklet</h2>
+      <h2>Bookmarklet</h2>
+      <p><a class="btn primary" href="javascript:(function(){var sc=document.createElement('script');sc.src='https://raw.github.com/aklaswad/sonificator/master/sonificator.js';var objBody = document.getElementsByTagName('body').item(0); objBody.appendChild(sc);})();">sonificator</a></p>
     </div>
     <div class="span12">
       <ol>
-        <li>Save this <a href="javascript:(function(){var sc=document.createElement('script');sc.src='https://raw.github.com/aklaswad/sonificator/master/sonificator.js';var objBody = document.getElementsByTagName('body').item(0); objBody.appendChild(sc);})();">Bookmarklet link</a> to your browser</li>
+        <li>Save the button on left as bookmark. When using Google Chrome, Drag that button to the Bookmark Bar.</li>
         <li>Go to webpage you like</li>
         <li>then, <strong>just</strong> run the bookmarklet</li>
       </ol>
+      <ol>
+        <li>左のボタンをブラウザのブックマークに追加します。Google Chromeでは、リンクをドラッグしてブックマークバーにドロップすることで追加できます。</li>
+        <li>好きなウェブページに移動します。</li>
+        <li>ブックマークをクリックすることで、音楽とアニメーションが開始します。</li>
+      </ol>
+      </p>
     </div>
   </div>
 
   <div class="row">
-    <div class="span16">
+    <div class="span8">
       <h2>Keyboard Shortcuts</h2>
       <p>You can use these shortcuts to conrol sound playing</p>
     </div>
+  </div>
 
-    <div class="span4">
-      <h3><span class="label">(Space bar)</span> Toggle playing</h3>
+  <div class="row">
+    <div class="span3">
+      <h3><span class="label">(Space bar)</span></h3>
+    </div>
+    <div class="span5">
+      <h4>Toggle playing</h4>
       <p>Toggle play and pause of sound</p>
       <p>再生/一時停止</p>
     </div>
-    <div class="span4">
-      <h3><span class="label">&#8593;</span> Tempo up</h3>
+    <div class="span3">
+      <h3><span class="label">A</span></h3>
+    </div>
+    <div class="span5">
+      <h4>Rewind</h4>
+      <p>Rewind the playing position to the beginning of the page.</p>
+      <p>ページの先頭まで再生を巻き戻す</p>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="span3">
+      <h3><span class="label">&#8592;</span></h3>
+    </div>
+    <div class="span5">
+      <h4>Rewind</h4>
+      <p>Rewind the playing point a bit (<code>8</code> events)</p>
+      <p>再生ポイントを少し巻き戻す</p>
+    </div>
+    <div class="span3">
+      <h3><span class="label">&#8594;</span></h3>
+    </div>
+    <div class="span5">
+      <h4>Forward</h4>
+      <p>Forward the playing point a bit (<code>8</code> events)</p>
+      <p>再生ポイントを少し進める</p>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="span3">
+      <h3><span class="label">Shift</span> + <span class="label">&#8592;</span></h3>
+    </div>
+    <div class="span5">
+      <h4>Rewind</h4>
+      <p>Rewind the playing point <code>64</code> events</p>
+      <p>再生ポイントを大きく巻き戻す</p>
+    </div>
+    <div class="span3">
+      <h3><span class="label">Shift</span> + <span class="label">&#8594;</span></h3>
+    </div>
+    <div class="span5">
+      <h4>Forward</h4>
+      <p>Forward the playing point <code>64</code> events</p>
+      <p>再生ポイントを大きく進める</p>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="span3">
+      <h3><span class="label">&#8593;</span></h3>
+    </div>
+    <div class="span5">
+      <h4>Tempo up</h4>
       <p>Up the BPM</p>
       <p>再生のテンポを上げる</p>
     </div>
-    <div class="span4">
-      <h3><span class="label">&#8595;</span> Tempo down</h3>
-        <p>Down the BPM</p>
+    <div class="span3">
+      <h3><span class="label">&#8595;</span></h3>
+    </div>
+    <div class="span5">
+      <h4>Tempo down</h4>
+      <p>Down the BPM</p>
       <p>再生のテンポを下げる</p>
     </div>
-    <div class="span4">
-      <h3><span class="label">A</span> Rewind</h3>
-        <p>Rewind the playing position to the beginning of the page.</p>
-        <p>ページの先頭まで再生を巻き戻す</p>
+
+  </div>
+
+  <div class="row">
+    <div class="span3">
+      <h3><span class="label">C</span></h3>
     </div>
-    <div class="span4">
-      <h3><span class="label">C</span> Toggle change key</h3>
+    <div class="span5">
+      <h4>Toggle change key</h4>
       <p>sonificator do musical key change when <code>h1</code> and <code>h2</code> was found. you can toggle this behavior on and off.</p>
       <p>sonificator は再生中に<code>h1</code>タグと<code>h2</code>タグを見つけたときに音楽的な転調を行います。このショートカットは転調機能のオン/オフを切り替えます。</p>
     </div>
@@ -178,31 +271,19 @@ body { margin-top: 50px; }
       <p>Can I play this program?</p>
     </div>
 
-    <div class="span6">
+    <div class="span8">
       <h3>Web browser that supports Web Audio API</h3>
       <p></p>
       <p>sonificator is using Web Audio API to playback sounds. Currently, Latest Google Chrome is the only one that supports Web Audio API.</p>
       <p>sonificator はオーディオの再生に Web Audio API を使用します。現在のところ、Google Chrome が唯一の選択肢です。</p>
     </div>
 
-    <div class="span6">
+    <div class="span8">
       <h3>System check</h3>
       <p>Click to test your browser supports Web Audio API<p>
       <p>お使いのブラウザが Web Audio API をサポートしているかをテストします<p>
       <p><span class="btn primary test-api-support">Test</span></p>
       <p><ul><li><span class="label api-ok">Supported</span></li><li><span class="label api-ng">Not Supported</span></li></p>
-    </div>
-  </div>
-
-
-  <div class="row">
-    <div class="span4">
-      <h2>Very quick test play</h2>
-    </div>
-    <div class="span12">
-      <p>here is pretty button to test <span>this</span> page</p>
-      <div><a href="#" class="play-this-page">Play this page</a></div>
-      <span>NOTE</span> click the button avobe, <strong>your browser sounds</strong>
     </div>
   </div>
 </section>
@@ -212,15 +293,18 @@ body { margin-top: 50px; }
     <h1>Good music pages</h1>
   </div>
   <ul>
-    <li><a href="https://github.com/aklaswad/">GitHub profile page</a></li>
-    <li><a href="http://blog.livedoor.jp/dankogai/">404 Blog Not Found</a></li>
-    <li><a href="https://www.facebook.com/">facebook</a> Arter toooo long intro (include long silent break), you can find ambient sound in the wall.</li>
+    <li><a href="https://github.com/aklaswad/">GitHub profile page <img src="external.png" /></a></li>
+    <li><a href="http://blog.livedoor.jp/dankogai/">404 Blog Not Found <img src="external.png" /></a></li>
+    <li><a href="https://www.facebook.com/">facebook <img src="external.png" /></a> Arter toooo long intro (include long silent break), you can find ambient sound in the wall.</li>
   </ul>
-
 </section>
 
 <footer>
-    Written by <a href="http://blog.aklaswad.com/">Akira Sawada</a>
+    <p>Written by <a href="http://blog.aklaswad.com/">Akira Sawada</a></p>
+    <ul>
+      <li><a href="https://github.com/aklaswad"><img src="https://github.com/favicon.ico"> <span>https://github.com/aklaswad/</span> <img src="external.png" /></a></li>
+      <li><a href="https://twitter.com/aklaswad"><img src="http://twitter.com/favicon.ico"> <span>https://twitter.com/aklaswad/</span> <img src="external.png" /></a></li>
+    </ul>
 </footer>
 
 </div>
