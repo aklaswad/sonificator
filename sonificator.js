@@ -483,6 +483,20 @@ function run ($) {
             console.log('BPM: ' + bpm);
             return false;
         }
+        else if ( e.keyCode == 37 ) {
+            var back_count = e.shiftKey ? 64 : 8;
+            elem_idx -= back_count;
+            elem_idx = (elem_idx + elems.length) % elems.length;
+            console.log('Rewinded ' + back_count + ' elements');
+            return false;
+        }
+        else if ( e.keyCode == 39 ) {
+            var forward_count = e.shiftKey ? 64 : 8;
+            elem_idx += forward_count;
+            elem_idx = (elem_idx + elems.length) % elems.length;
+            console.log('Forwarded ' + forward_count + ' elements');
+            return false;
+        }
         else if ( e.keyCode == 32 ) {
             manager.playing ? manager.pause() : manager.play();
             console.log( manager.playing ? 'Playing' : 'Paused' );
