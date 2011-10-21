@@ -1,1 +1,228 @@
-sonificator
+<!DOCTYPE html>
+<head lang="ja">
+<meta charset="UTF-8">
+<title>sonificator</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script>
+$( function () {
+
+$('.play-this-page').click( function () {
+  $('<script>')
+    .attr('src', 'https://raw.github.com/aklaswad/sonificator/master/sonificator.js')
+    .appendTo( $('body') );
+  return false;
+});
+
+
+$('.test-api-support').click ( function () {
+  var ok
+    = undefined !== window.webkitAudioContext
+    && new webkitAudioContext();
+  if ( ok ) {
+    $('.api-ok').addClass('success');
+    $('.api-ng').removeClass('warning');
+  }
+  else {
+    $('.api-ok').removeClass('success');
+    $('.api-ng').addClass('warning');
+  }
+});
+
+});
+</script>
+<link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css">
+<style>
+body { margin-top: 50px; }
+</style>
+
+</head>
+<body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=235263546528942";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="topbar" >
+  <div class="topbar-inner">
+    <div class="container">
+      <a class="brand" href="#">sonificator</a>
+      <ul class="nav">
+        <li><a href="#about">About</a></li>
+        <li><a href="#how-to-play">How To Play</a></li>
+      </ul>
+      <ul class="nav secondary-nav">
+        <li><a href="#" class="play-this-page">Play this page <span class="label important">possibly loud!!!</span></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div style="display: none"></div>
+<div style="display: none"></div>
+<div style="display: none"></div>
+<div style="display: none"></div>
+<div style="display: none"></div>
+<div style="display: none"></div>
+<div style="display: none"></div>
+<div style="display: none"></div>
+<div style="display: none"></div>
+<div style="display: none"></div>
+<div style="display: none"></div>
+<div style="display: none"></div>
+<div style="display: none"></div>
+
+<div class="container">
+
+<div class="hero-unit">
+  <p>
+    <a href="http://aklaswad.github.com/sonificator">sonificator</a> make every <strong>Web Pages</strong> to <strong>Music</strong>. Experience sound and visual of the structure of DOM and Webpages.
+  </p>
+  <p>
+    <a href="http://aklaswad.github.com/sonificator">sonificator</a>は、あらゆる<strong>ウェブページ</strong>から<strong>音楽</strong>を作り出します。サウンドとビジュアルでウェブページのDOMの構造を体験できます。
+  </p>
+  <img src="sonificator.png" />
+  <ul>
+    <li><div class="fb-like" data-href="http://aklaswad.github.com/sonificator/" data-send="false" data-width="450" data-show-faces="true"></div></li>
+    <li><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="aklaswad">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script></li>
+  </ul>
+</div>
+
+
+
+<section id="about">
+  <div class="page-header">
+    <h1>About</h1>
+  </div>
+
+
+  <div class="row">
+    <div class="span16">
+      <blockquote>
+        <p><b>Sonification</b> is the use of non-speech <a href="http://en.wikipedia.org/wiki/Sound" title="Sound">audio <img src="external.png" /></a> to convey <a href="http://en.wikipedia.org/wiki/Information" title="Information">information< <img src="external.png" /></a> or perceptualize data.<sup id="cite_ref-0" class="reference"><a href="http://en.wikipedia.org/wiki/Sonification#cite_note-0"><span>[</span>1<span>]</span> <img src="external.png" /></a></sup> Due to the specifics of <a href="http://en.wikipedia.org/wiki/Auditory_system" title="Auditory system">auditory perception <img src="external.png" /></a>, such as temporal and pressure resolution, it forms an interesting alternative or complement to <a href="http://en.wikipedia.org/wiki/Data_visualization" title="Data visualization">visualization <img src="external.png" /></a> techniques, gaining importance in various disciplines. It has been well established for a long time already as <a href="http://en.wikipedia.org/wiki/Auditory_display" title="Auditory display">Auditory display <img src="external.png" /></a> in situations that require a constant awareness of some information (e.g. vital body functions during an operation). Sonification as a method for exploration of data and scientific modeling is a current and ongoing research desideratum.</p>
+        <small><a href="http://en.wikipedia.org/wiki/Sonification">Sonification - Wikipedia, the free encyclopedia</a></small>
+      </blockquote>
+
+      <p>This program <a href="http://aklaswad.github.com/sonificator">sonificator</a> can built a music from the <a href="http://en.wikipedia.org/wiki/Document_Object_Model">DOM</a> structure with simple rule. sounds are designed good to listen like ambient or experimental erectoronic music.
+      </p>
+      <p>
+        <a href="http://aklaswad.github.com/sonificator">sonificator</a> also provide a visual highlight animation of the webpage synchronized to the sound. This may help you know which sound events are come from which element on the page.
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span4">aaa</div>
+    <div class="span4">aaa</div>
+    <div class="span4">aaa</div>
+    <div class="span4">aaa</div>
+  </div>
+</section>
+
+
+<section id="how-to-play">
+  <div class="page-header">
+    <h1>How To Play</h1>
+  </div>
+  <div class="row">
+    <div class="span4">
+      <h2>Use Bookmarklet</h2>
+    </div>
+    <div class="span12">
+      <ol>
+        <li>Save this <a href="javascript:(function(){var sc=document.createElement('script');sc.src='https://raw.github.com/aklaswad/sonificator/master/sonificator.js';var objBody = document.getElementsByTagName('body').item(0); objBody.appendChild(sc);})();">Bookmarklet link</a> to your browser</li>
+        <li>Go to webpage you like</li>
+        <li>then, <strong>just</strong> run the bookmarklet</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span16">
+      <h2>Keyboard Shortcuts</h2>
+      <p>You can use these shortcuts to conrol sound playing</p>
+    </div>
+
+    <div class="span4">
+      <h3><span class="label">(Space bar)</span> Toggle playing</h3>
+      <p>Toggle play and pause of sound</p>
+      <p>再生/一時停止</p>
+    </div>
+    <div class="span4">
+      <h3><span class="label">&#8593;</span> Tempo up</h3>
+      <p>Up the BPM</p>
+      <p>再生のテンポを上げる</p>
+    </div>
+    <div class="span4">
+      <h3><span class="label">&#8595;</span> Tempo down</h3>
+        <p>Down the BPM</p>
+      <p>再生のテンポを下げる</p>
+    </div>
+    <div class="span4">
+      <h3><span class="label">A</span> Rewind</h3>
+        <p>Rewind the playing position to the beginning of the page.</p>
+        <p>ページの先頭まで再生を巻き戻す</p>
+    </div>
+    <div class="span4">
+      <h3><span class="label">C</span> Toggle change key</h3>
+      <p>sonificator do musical key change when <code>h1</code> and <code>h2</code> was found. you can toggle this behavior on and off.</p>
+      <p>sonificator は再生中に<code>h1</code>タグと<code>h2</code>タグを見つけたときに音楽的な転調を行います。このショートカットは転調機能のオン/オフを切り替えます。</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span16">
+      <h2>System requirements</h2>
+      <p>Can I play this program?</p>
+    </div>
+
+    <div class="span6">
+      <h3>Web browser that supports Web Audio API</h3>
+      <p></p>
+      <p>sonificator is using Web Audio API to playback sounds. Currently, Latest Google Chrome is the only one that supports Web Audio API.</p>
+      <p>sonificator はオーディオの再生に Web Audio API を使用します。現在のところ、Google Chrome が唯一の選択肢です。</p>
+    </div>
+
+    <div class="span6">
+      <h3>System check</h3>
+      <p>Click to test your browser supports Web Audio API<p>
+      <p>お使いのブラウザが Web Audio API をサポートしているかをテストします<p>
+      <p><span class="btn primary test-api-support">Test</span></p>
+      <p><ul><li><span class="label api-ok">Supported</span></li><li><span class="label api-ng">Not Supported</span></li></p>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="span4">
+      <h2>Very quick test play</h2>
+    </div>
+    <div class="span12">
+      <p>here is pretty button to test <span>this</span> page</p>
+      <div><a href="#" class="play-this-page">Play this page</a></div>
+      <span>NOTE</span> click the button avobe, <strong>your browser sounds</strong>
+    </div>
+  </div>
+</section>
+
+<section id="musical pages">
+  <div class="page-header">
+    <h1>Good music pages</h1>
+  </div>
+  <ul>
+    <li><a href="https://github.com/aklaswad/">GitHub profile page</a></li>
+    <li><a href="http://blog.livedoor.jp/dankogai/">404 Blog Not Found</a></li>
+    <li><a href="https://www.facebook.com/">facebook</a> Arter toooo long intro (include long silent break), you can find ambient sound in the wall.</li>
+  </ul>
+
+</section>
+
+<footer>
+    Written by <a href="http://blog.aklaswad.com/">Akira Sawada</a>
+</footer>
+
+</div>
+</body>
+</html>
