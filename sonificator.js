@@ -369,62 +369,72 @@ SoundManager.prototype = {
 };
 
 
+
+var style_rules = [
+    '* {color: #111 !important; background: #000 !important; }',
+    'img, object, iframe, embed, input { opacity: 0.1 !important; }',
+    '.soni-highlight-0 { background: #fff !important; }',
+    '.soni-highlight-1 { background: #aaa !important; }',
+    '.soni-highlight-2 { background: #777 !important; }',
+    '.soni-highlight-3 { background: #444 !important; }',
+    '.soni-highlight-4 { background: #222 !important; }',
+    '.soni-highlight-5 { background: #000 !important; }',
+    'img.soni-highlight-0, object.soni-highlight-0, iframe.soni-highlight-0, embed.soni-hightlight-0, input.soni-highlight-0 { opacity: 1.0 !important; }',
+    'img.soni-highlight-1, object.soni-highlight-1, iframe.soni-highlight-1, embed.soni-hightlight-1, input.soni-highlight-1 { opacity: 0.8 !important; }',
+    'img.soni-highlight-2, object.soni-highlight-2, iframe.soni-highlight-2, embed.soni-hightlight-2, input.soni-highlight-2 { opacity: 0.6 !important; }',
+    'img.soni-highlight-3, object.soni-highlight-3, iframe.soni-highlight-3, embed.soni-hightlight-3, input.soni-highlight-3 { opacity: 0.4 !important; }',
+    'img.soni-highlight-4, object.soni-highlight-4, iframe.soni-highlight-4, embed.soni-hightlight-4, input.soni-highlight-4 { opacity: 0.2 !important; }',
+    'img.soni-highlight-5, object.soni-highlight-5, iframe.soni-highlight-5, embed.soni-hightlight-5, input.soni-highlight-5 { opacity: 0.1 !important; }',
+];
+
 function run ($) {
     var modStyles = [
         'background',
         'color'
     ];
 
-    var stylesheet = $('<style type="text/css" id="soniStyle"></style>').appendTo($('head').eq(0)).get(0).sheet;
-    stylesheet.insertRule( '* { color: #111 !important; background: #000 !important; }' );
-    stylesheet.insertRule( 'img, object, iframe, embed, input { opacity: 0.1 !important; }' );
+    var stylesheet;
+    function installStylesheet () {
+        stylesheet = stylesheet || $('<style type="text/css" id="soniStyle"></style>').appendTo($('head').eq(0)).get(0).sheet;
+        for ( var rule_idx = 0; rule_idx < style_rules.length; rule_idx++ ) {
+            var rule = style_rules[rule_idx];
+            stylesheet.insertRule(rule);
+        }
+    }
+
+    function uninstallStylesheet () {
+        while ( stylesheet.cssRules.length ) {
+            stylesheet.deleteRule(0);
+        }
+    }
 
     var elems = $('body').eq(0).find('*');
-
-
-
     var interval;
     var last = [[],[],[],[],[]];
     var elem_idx = 0;
     var last_idx = 0;
-    var last_styles = {
-        0: { background: '#fff !important' },
-        1: { background: '#aaa !important' },
-        2: { background: '#777 !important' },
-        3: { background: '#444 !important' },
-        4: { background: '#222 !important' },
-        5: { background: '#000 !important' }
-    };
-    var last_object_styles = {
-        0: { opacity: '1.0 !important' },
-        1: { opacity: '0.8 !important' },
-        2: { opacity: '0.6 !important' },
-        3: { opacity: '0.4 !important' },
-        4: { opacity: '0.2 !important' },
-        5: { opacity: '0.1 !important' }
-    };
 
     // samples per tick
     var event_phase = 0;
     var current_scroll = 0;
     var highlight = function (mngr, length) {
-        var spt = (mngr.context.sampleRate * 60) / (bpm * 4);
         // At first, proccess the fade out buffer for smooth animate.
         if ( do_animation ) {
-            var fadeout_gen = 0;
-            for ( var l = last_idx + 5; l >= last_idx; l-- ) {
-                var ll = l % 5;
-                for (var fo_id = 0; fo_id < last[ll].length; fo_id++) {
-                    var el = last[ll][fo_id];
-                    if ( el.get(0).tagName.match(/^(img|embed|iframe|object)$/i) )
-                        el.css( last_object_styles[fadeout_gen] );
-                    else
-                        el.css( last_styles[fadeout_gen] );
+            var fadeout_gen = 5;
+            for ( var offset = 0; offset < 5; offset++ ) {
+                var idx = ( last_idx + offset ) % 5;
+                for (var fo_id = 0; fo_id < last[idx].length; fo_id++) {
+                    var el = last[idx][fo_id];
+                    el.removeClass('soni-highlight-' + (Number(fadeout_gen) - 1));
+                    el.addClass( 'soni-highlight-' + fadeout_gen );
                 }
-                fadeout_gen++;
+                fadeout_gen--;
             }
-            last[last_idx]       = [];
+            last[last_idx] = [];
         }
+
+        // Calucurate Samples Per Tick.
+        var spt = (mngr.context.sampleRate * 60) / (bpm * 4);
 
         // Pick up how many events in this frame
         var events = [];
@@ -445,11 +455,7 @@ function run ($) {
             }
 
             if ( do_animation ) {
-                if ( div.get(0).tagName.match(/^(img|embed|iframe|object)$/i) )
-                    div.css( last_object_styles[0] );
-                else
-                    div.css( last_styles[0] );
-                div.css( last_styles[0] );
+                div.addClass( 'soni-highlight-0' );
                 last[last_idx].push(div);
 
                 if ( $(div).offset().top > current_scroll + $(window).height() - 80 ) {
@@ -498,7 +504,14 @@ function run ($) {
             return false;
         }
         else if ( e.keyCode == 32 ) {
-            manager.playing ? manager.pause() : manager.play();
+            if ( manager.playing ) {
+                manager.pause();
+                uninstallStylesheet();
+            }
+            else {
+                manager.play();
+                installStylesheet();
+            }
             console.log( manager.playing ? 'Playing' : 'Paused' );
             return false;
         }
@@ -520,6 +533,7 @@ function run ($) {
     });
 
     // Autoplay. Do you like?
+    installStylesheet();
     manager.play();
 }
 
