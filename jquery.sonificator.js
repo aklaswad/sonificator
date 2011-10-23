@@ -1,13 +1,11 @@
-(function () {
-
+;( function($) {
 
 // Default settings
 var bpm               = 140;
-var wave_table_length = 256;
 var wave_tables       = {};
+var wave_table_length = 256;
 var do_change_key     = true;
 var do_animation      = true;
-
 
 // Create wave form tables
 // They must have ( wave_table_length + 1 ) atoms
@@ -50,8 +48,6 @@ var do_animation      = true;
     }
     wave_tables['saw'] = table;
 })();
-
-
 
 function Oscillator (manager, opts) {
     this.freq = opts.freq || 440;
@@ -111,7 +107,6 @@ Instrument.prototype = {
         for ( var i = 0; i < this.oscs.length; i++ ) this.oscs[i].setFreq(note);
     },
     noteOff: function () {
-
         this._noting = false;
         this._release_ratio = this._amp / this.release;
     },
@@ -396,8 +391,6 @@ var style_rules = [
     'img.soni-highlight-5, object.soni-highlight-5, iframe.soni-highlight-5, embed.soni-hightlight-5, input.soni-highlight-5 { opacity: 0.1 !important; }',
 ];
 
-function run ($) {
-
     var stylesheet;
     function installStylesheet () {
         stylesheet = stylesheet || $('<style type="text/css" id="soniStyle"></style>').appendTo($('head').eq(0)).get(0).sheet;
@@ -535,29 +528,7 @@ function run ($) {
         return true;
     });
 
-    // Autoplay. Do you like?
     installStylesheet();
-    manager.play();
-}
+    $.sonificator = manager;
 
-if ( undefined === window.jQuery ) {
-    console.log('Going to load jQuery');
-    var sc = document.createElement('script');
-    sc.setAttribute('src', "https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js");
-    var body = document.getElementsByTagName('body').item(0);
-    body.appendChild(sc);
-    console.log('Finished Loading jQuery');
-}
-else {
-    console.log('jQuery is ready');
-}
-
-var wait_for_jquery;
-wait_for_jquery = setInterval( function () {
-    if ( undefined !== window.jQuery ) {
-        clearInterval(wait_for_jquery);
-        run(jQuery);
-    }
-}, 200);
-
-})();
+})(jQuery);
