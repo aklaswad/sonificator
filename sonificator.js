@@ -229,9 +229,9 @@ SoundManager.prototype = {
         var delay_buffer   = new Array();
         var delay_idx      = 0;
         var delay_feedback = 0.45;
-        var amp = 0.0;
-        var attack = 0;
+
         var last_v = 0.0;
+
         var last_tag = '';
         var last_tag2 = '';
         var last_tag3 = '';
@@ -239,19 +239,24 @@ SoundManager.prototype = {
         var last_tag5 = '';
         var last_tag6 = '';
         var cont = 0;
+
         var freq1_base = 61.875;
         var freq2_base = freq1_base * 1.5;
         var freq1 = freq1_base;
         var freq2 = freq2_base;
+
         this.node.onaudioprocess = function (e) {
             var event_map = that.cb(that, that.bufferLength);
             var buffer = new Float32Array(that.bufferLength);
             var delay_len      = Math.floor((( that.context.sampleRate * 60 ) / bpm) * 0.75);
+
             for ( var i = 0; i < buffer.length; i++ ) {
                 var v = 0.0;
                 var $elem = event_map[i];
                 if ( $elem ) {
                     var tag = $elem.get(0).tagName;
+
+                    // Change key from tagname
                     if ( do_change_key ) {
                         if ( tag == 'H1') {
                             freq1_base *= ( 4 / 3 );
@@ -266,8 +271,9 @@ SoundManager.prototype = {
                             if ( freq2_base > 100 ) freq2_base /= 2;
                         }
                     }
-                    var inst = [];
 
+                    // Make instrument list from tagname
+                    var inst = [];
                     if ( tag == 'DIV' ) {
                         inst.push('seq');
                     }
@@ -287,7 +293,6 @@ SoundManager.prototype = {
                     else {
                         inst.push('sin');
                     }
-
 
                     // Avoid the boredom
                     if ( tag == last_tag && last_tag == last_tag2 && last_tag2 == last_tag3 ) {
@@ -334,22 +339,27 @@ SoundManager.prototype = {
                         var this_inst = that.insts[inst[inst_n]];
                         this_inst.noteOn( freq1 * ( Math.floor( $elem.width() / 90 ) + 1), 1.0, 2000 );
                     }
-                    amp = 0.0;
-
                 }
 
+                // Get values from each instruments
                 for ( var inst_name in that.insts ) {
                     v += that.insts[inst_name].get();
                 }
+
+                // FIXME: Cheepest filter
                 var vv = v;
                 v = ( vv + last_v ) / 2;
                 last_v = vv;
 
+                // FIXME: Cheepest delay
                 v += ( delay_buffer[delay_idx] || 0.0 ) * delay_feedback;
                 delay_buffer[delay_idx] = v;
                 delay_idx = ( delay_idx + 1 ) % delay_len;
+
+                // Output
                 buffer[i] = v;
             }
+
             for ( var ch = 0; ch < that.channels; ch++) {
                 var data = e.outputBuffer.getChannelData(ch);
                 data.set( buffer );
@@ -367,8 +377,6 @@ SoundManager.prototype = {
         this.node.disconnect();
     }
 };
-
-
 
 var style_rules = [
     '* {color: #111 !important; background: #000 !important; }',
@@ -388,10 +396,6 @@ var style_rules = [
 ];
 
 function run ($) {
-    var modStyles = [
-        'background',
-        'color'
-    ];
 
     var stylesheet;
     function installStylesheet () {
@@ -468,12 +472,10 @@ function run ($) {
 
             }
             res[Math.floor(event_time)] = div;
-
         }
         last_idx = ( last_idx + 1 ) % 5;
         return res;
     };
-
 
     var manager = new SoundManager(highlight);
     // Controls
