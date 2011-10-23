@@ -2,11 +2,11 @@
 
 
 // Default settings
-var bpm = 140;
-var wave_table_length = 140;
-var wave_tables = {};
-var do_change_key = true;
-var do_animation  = true;
+var bpm               = 140;
+var wave_table_length = 256;
+var wave_tables       = {};
+var do_change_key     = true;
+var do_animation      = true;
 
 
 // Create wave form tables
@@ -214,6 +214,7 @@ SoundManager.prototype = {
             this.__proto__.noteOn.apply(this, [note * 2, 1.0, 2000]);
             this.oscs[1].setFreq(note * 3);
         };
+
         var snr_fltr = 0.0;
         this.insts.snr.get = function () {
             var v = this.__proto__.get.apply(this);
@@ -232,23 +233,23 @@ SoundManager.prototype = {
 
         var last_v = 0.0;
 
-        var last_tag = '';
+        var last_tag  = '';
         var last_tag2 = '';
         var last_tag3 = '';
         var last_tag4 = '';
         var last_tag5 = '';
         var last_tag6 = '';
-        var cont = 0;
+        var cont      = 0;
 
         var freq1_base = 61.875;
         var freq2_base = freq1_base * 1.5;
-        var freq1 = freq1_base;
-        var freq2 = freq2_base;
+        var freq1      = freq1_base;
+        var freq2      = freq2_base;
 
         this.node.onaudioprocess = function (e) {
             var event_map = that.cb(that, that.bufferLength);
-            var buffer = new Float32Array(that.bufferLength);
-            var delay_len      = Math.floor((( that.context.sampleRate * 60 ) / bpm) * 0.75);
+            var buffer    = new Float32Array(that.bufferLength);
+            var delay_len = Math.floor((( that.context.sampleRate * 60 ) / bpm) * 0.75);
 
             for ( var i = 0; i < buffer.length; i++ ) {
                 var v = 0.0;
