@@ -138,7 +138,7 @@
         this.bufferLength = 4096;   // A bit slow about animation, but safe against glitch noise.
         this.context      = new webkitAudioContext();
         this.destination  = this.context.destination;
-        this.channels     = this.destination.numberOfChannels;
+        this.channels     = this.destination.numberOfChannels || this.destination.channelCount;
         this.node         = this.context.createJavaScriptNode(this.bufferLength, 2, this.channels);
         this.init();
     }
