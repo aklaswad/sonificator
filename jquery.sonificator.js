@@ -139,7 +139,7 @@
         this.context      = new webkitAudioContext();
         this.destination  = this.context.destination;
         this.channels     = this.destination.numberOfChannels;
-        this.node         = this.context.createJavaScriptNode(this.bufferLength, 0, this.channels);
+        this.node         = this.context.createJavaScriptNode(this.bufferLength, 2, this.channels);
         this.init();
     }
 
