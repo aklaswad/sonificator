@@ -396,7 +396,7 @@
         stylesheet = stylesheet || $('<style type="text/css" id="soniStyle"></style>').appendTo($('head').eq(0)).get(0).sheet;
         for ( var rule_idx = 0; rule_idx < style_rules.length; rule_idx++ ) {
             var rule = style_rules[rule_idx];
-            stylesheet.insertRule(rule);
+            stylesheet.insertRule(rule, 0);
         }
     }
 
