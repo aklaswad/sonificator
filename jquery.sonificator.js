@@ -136,10 +136,10 @@
         this.cb           = cb;
         //this.bufferLength = 2048;   // about 23.5 fps. It's good for animation.
         this.bufferLength = 4096;   // A bit slow about animation, but safe against glitch noise.
-        this.context      = new webkitAudioContext();
+        this.context      = new (AudioContext || webkitAudioContext)();
         this.destination  = this.context.destination;
         this.channels     = this.destination.numberOfChannels || this.destination.channelCount;
-        this.node         = this.context.createJavaScriptNode(this.bufferLength, 2, this.channels);
+        this.node         = this.context.createScriptProcessor(this.bufferLength, 2, this.channels);
         this.init();
     }
 
