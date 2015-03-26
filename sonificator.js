@@ -67,7 +67,7 @@ function loadScripts (scripts, cb) {
 
 // Way to override sonificator src.
 var soni_src = window.__sonificator_url
-             || "https://raw.github.com/aklaswad/sonificator/master/jquery.sonificator.js";
+             || "https://aklaswad.github.io/sonificator/jquery.sonificator.js";
 
 loadScripts([
     [[
