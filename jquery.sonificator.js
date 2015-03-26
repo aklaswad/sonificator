@@ -136,7 +136,7 @@
         this.cb           = cb;
         //this.bufferLength = 2048;   // about 23.5 fps. It's good for animation.
         this.bufferLength = 4096;   // A bit slow about animation, but safe against glitch noise.
-        this.context      = new (AudioContext || webkitAudioContext)();
+        this.context      = AudioContext ? new AudioContext() : new webkitAudioContext();
         this.destination  = this.context.destination;
         this.channels     = this.destination.numberOfChannels || this.destination.channelCount;
         this.node         = this.context.createScriptProcessor(this.bufferLength, 2, this.channels);
@@ -161,7 +161,7 @@
                 new Oscillator(this, { type: 'sine' })
             ];
             this.insts.sin.noteOn = function (note, volume, length) {
-                this.prototype.noteOn.apply(this, [note, volume, length]);
+                Instrument.prototype.noteOn.apply(this, [note, volume, length]);
                 this.oscs[1].setFreq(note * 0.75 );
             };
 
@@ -170,7 +170,7 @@
                 new Oscillator(this, { type: 'sine2' })
             ];
             this.insts.sin2.noteOn = function (note, volume, length) {
-                this.prototype.noteOn.apply(this, [note, volume, length]);
+                Instrument.prototype.noteOn.apply(this, [note, volume, length]);
                 this.oscs[1].setFreq(note * 1.5 );
             };
 
@@ -179,7 +179,7 @@
                 new Oscillator(this, { type: 'saw' })
             ];
             this.insts.seq.noteOn = function (note, volume, length) {
-                this.prototype.noteOn.apply(this, [note, volume, length]);
+                Instrument.prototype.noteOn.apply(this, [note, volume, length]);
                 this.oscs[1].setFreq(note * 1.5);
             };
 
@@ -188,13 +188,13 @@
                 new Oscillator(this, { type: 'sine2' })
             ];
             this.insts.kick.noteOn = function (note, volume, length) {
-                this.prototype.noteOn.apply(this, [180, volume, 10000]);
+                Instrument.prototype.noteOn.apply(this, [180, volume, 10000]);
                 this.oscs[1].setFreq(note * 3);
             };
             this.insts.kick.get = function () {
                 this.oscs[0].setFreq( this.oscs[0].freq * 0.9998 );
                 this.oscs[1].setFreq( this.oscs[1].freq * 0.9994 );
-                var v = this.prototype.get.apply(this);
+                var v = Instrument.prototype.get.apply(this);
                 v *= 2.3;
                 if ( v > 1.0 ) v = 1.0;
                 if ( v < -1.0 ) v = -1.0;
@@ -206,13 +206,13 @@
                 new Oscillator(this, { type: 'saw' })
             ];
             this.insts.snr.noteOn = function (note, volume, length) {
-                this.prototype.noteOn.apply(this, [note * 2, 1.0, 2000]);
+                Instrument.prototype.noteOn.apply(this, [note * 2, 1.0, 2000]);
                 this.oscs[1].setFreq(note * 3);
             };
 
             var snr_fltr = 0.0;
             this.insts.snr.get = function () {
-                var v = this.prototype.get.apply(this);
+                var v = Instrument.prototype.get.apply(this);
                 v += Math.random() * this._amp * 0.4;
                 v *= 1.3;
                 if ( v > 0.8 ) v = 0.8;

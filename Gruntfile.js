@@ -4,7 +4,8 @@ module.exports = function(grunt) {
     jshint: {
       files: ['site/**/*.js', 'jquery.sonificator.js', 'sonificator.js'],
       options: {
-        loopfunc: true
+        loopfunc: true,
+        ignores: ['**/*.min.js']
       }
     },
     uglify: {
