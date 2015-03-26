@@ -29,5 +29,5 @@ module.exports = function(grunt) {
 
   grunt.registerTask('test',['jshint']);
   grunt.registerTask('default', []);
-  grunt.registerTask('publish', ['jshint','gh-pages']);
+  grunt.registerTask('publish', ['jshint','uglify','gh-pages']);
 };
