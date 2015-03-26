@@ -17,7 +17,7 @@
         for ( var i = 0; i < wave_table_length + 1; i++ ) {
             table[i] = Math.sin( i * Math.PI * 2 / wave_table_length );
         }
-        wave_tables['sine'] = table;
+        wave_tables.sine = table;
     })();
 
     // Create squared sine table
@@ -26,7 +26,7 @@
         for ( var i = 0; i < wave_table_length + 1; i++ ) {
             table[i] = Math.pow( Math.sin( i * Math.PI * 2 / wave_table_length ), 2);
         }
-        wave_tables['sine2'] = table;
+        wave_tables.sine2 = table;
     })();
 
     // Create steel table
@@ -37,7 +37,7 @@
         for ( var i = 0; i < wave_table_length + 1; i++ ) {
             table[i] = Math.random() * 2 - 1.0;
         }
-        wave_tables['steel'] = table;
+        wave_tables.steel = table;
     })();
 
     // Create saw-tooth table
@@ -46,7 +46,7 @@
         for ( var i = 0; i < wave_table_length + 1; i++ ) {
             table[i] = ( i / wave_table_length ) * 2 - 1;
         }
-        wave_tables['saw'] = table;
+        wave_tables.saw = table;
     })();
 
     function Oscillator (manager, opts) {
@@ -161,40 +161,40 @@
                 new Oscillator(this, { type: 'sine' })
             ];
             this.insts.sin.noteOn = function (note, volume, length) {
-                this.__proto__.noteOn.apply(this, [note, volume, length]);
+                this.prototype.noteOn.apply(this, [note, volume, length]);
                 this.oscs[1].setFreq(note * 0.75 );
-            },
+            };
 
             this.insts.sin2.oscs = [
                 new Oscillator(this, { type: 'sine2' }),
                 new Oscillator(this, { type: 'sine2' })
             ];
             this.insts.sin2.noteOn = function (note, volume, length) {
-                this.__proto__.noteOn.apply(this, [note, volume, length]);
+                this.prototype.noteOn.apply(this, [note, volume, length]);
                 this.oscs[1].setFreq(note * 1.5 );
-            },
+            };
 
             this.insts.seq.oscs = [
                 new Oscillator(this, { type: 'saw' }),
                 new Oscillator(this, { type: 'saw' })
             ];
             this.insts.seq.noteOn = function (note, volume, length) {
-                this.__proto__.noteOn.apply(this, [note, volume, length]);
+                this.prototype.noteOn.apply(this, [note, volume, length]);
                 this.oscs[1].setFreq(note * 1.5);
-            },
+            };
 
             this.insts.kick.oscs = [
                 new Oscillator(this, { type: 'sine' }),
                 new Oscillator(this, { type: 'sine2' })
             ];
             this.insts.kick.noteOn = function (note, volume, length) {
-                this.__proto__.noteOn.apply(this, [180, volume, 10000]);
+                this.prototype.noteOn.apply(this, [180, volume, 10000]);
                 this.oscs[1].setFreq(note * 3);
-            },
+            };
             this.insts.kick.get = function () {
                 this.oscs[0].setFreq( this.oscs[0].freq * 0.9998 );
                 this.oscs[1].setFreq( this.oscs[1].freq * 0.9994 );
-                var v = this.__proto__.get.apply(this);
+                var v = this.prototype.get.apply(this);
                 v *= 2.3;
                 if ( v > 1.0 ) v = 1.0;
                 if ( v < -1.0 ) v = -1.0;
@@ -206,13 +206,13 @@
                 new Oscillator(this, { type: 'saw' })
             ];
             this.insts.snr.noteOn = function (note, volume, length) {
-                this.__proto__.noteOn.apply(this, [note * 2, 1.0, 2000]);
+                this.prototype.noteOn.apply(this, [note * 2, 1.0, 2000]);
                 this.oscs[1].setFreq(note * 3);
             };
 
             var snr_fltr = 0.0;
             this.insts.snr.get = function () {
-                var v = this.__proto__.get.apply(this);
+                var v = this.prototype.get.apply(this);
                 v += Math.random() * this._amp * 0.4;
                 v *= 1.3;
                 if ( v > 0.8 ) v = 0.8;
@@ -222,7 +222,7 @@
                 return v;
             };
 
-            var delay_buffer   = new Array();
+            var delay_buffer   = [];
             var delay_idx      = 0;
             var delay_feedback = 0.45;
 
@@ -445,10 +445,10 @@
             var event_time = events[ev];
             var div = elems.eq(elem_idx);
             elem_idx = ( elem_idx + 1 ) % elems.length;
-            if (   !( div.is(':visible') )
-                || div.height() == 0
-                || div.width()  == 0
-                || div.css('visibility') == 'hidden' ) {
+            if (   !( div.is(':visible') ) ||
+                div.height() === 0 ||
+                div.width()  === 0 ||
+                div.css('visibility') == 'hidden' ) {
                 continue;
             }
 

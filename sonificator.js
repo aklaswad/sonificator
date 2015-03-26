@@ -29,7 +29,7 @@ function __loadScript( src, watcher, success ) {
     script.setAttribute('src', src);
     body.appendChild(script);
     if ( watcher ) {
-        __wait( watcher, success, function () { console.log('Failed to load script: ' + src )} );
+        __wait( watcher, success, function () { console.log('Failed to load script: ' + src ); });
     }
     else if ( success ) {
         success();
@@ -43,19 +43,19 @@ function loadScripts (scripts, cb) {
             var asyncSet = scripts[i];
             return function () {
                 var flags = [];
-                for ( var i = 0; i < asyncSet.length; i++ ) {
-                    ( function (idx) {
-                        var src     = asyncSet[idx][0];
-                        var watcher = asyncSet[idx][1];
+                for ( var j = 0; j < asyncSet.length; j++ ) {
+                    ( function (j) {
+                        var src     = asyncSet[j][0];
+                        var watcher = asyncSet[j][1];
                         __loadScript(src, watcher, function () {
-                            flags[idx] = true;
+                            flags[j] = true;
                         });
-                    })(i);
+                    })(j);
                 }
                 __wait( function(){
                     var ok = true;
-                    for ( var i = 0; i < asyncSet.length; i++ ) {
-                        if ( !flags[i] ) ok = false;
+                    for ( var k = 0; k < asyncSet.length; k++ ) {
+                        if ( !flags[k] ) ok = false;
                     }
                     return ok;
                 }, cb );
@@ -66,17 +66,17 @@ function loadScripts (scripts, cb) {
 }
 
 // Way to override sonificator src.
-var soni_src = window.__sonificator_url
-             || "https://aklaswad.github.io/sonificator/jquery.sonificator.js";
+var soni_src = window.__sonificator_url ||
+               "https://aklaswad.github.io/sonificator/jquery.sonificator.js";
 
 loadScripts([
     [[
         "https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js",
-        function () { return window.jQuery }
+        function () { return window.jQuery; }
     ]],
     [[
         soni_src,
-        function () { return window.jQuery.sonificator }
+        function () { return window.jQuery.sonificator; }
     ]],
 ], function () { jQuery.sonificator.play(); });
 

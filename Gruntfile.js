@@ -3,6 +3,9 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     jshint: {
       files: ['site/**/*.js', 'jquery.sonificator.js', 'sonificator.js'],
+      options: {
+        loopfunc: true
+      }
     },
     uglify: {
       dist: {
